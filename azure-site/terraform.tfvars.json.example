@@ -1,0 +1,6 @@
+{
+"projectPrefix":"${projectPrefix}",
+"azureRegion":"${azureRegion}",
+"resourceGroup":"${resourceGroup}",
+"hubVnetName":"${hubVnetName}"
+}
