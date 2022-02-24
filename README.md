@@ -1,20 +1,18 @@
-# Solutions Engineering Template Repository
-A template repository that contains all required files (LICENSE, SUPPORT, CONTRIBUTING, etc) as outlined in the org standards.  
-
-
-The sections below are recommended in your project's README.md file. 
+# F5 Distributed Cloud AWS/Azure Lab
 
 ## Overview
-Provide a short overview of the project.
+Lab environment for AWS/Azure Multi-Cloud Networking.
 
 ## Getting Started
-Provide a quick example of how to use your code.  This should provide the user with a launch point to quickly see what the project can offer them. 
+This uses terraform to deploy resources.
 
 ## Installation
-Outline the requirements and steps to install this project. 
+Download terraform
 
 ## Usage
-Outline how the user can use your project and the various features the project offers. 
+To deploy the AWS site start in the "base-aws-network" directory.  Run "terraform init".  Configure the necessary variables.  Run "terraform apply".
+
+After you deploy the base networking you can deploy the "tgw-site" directory.  Note that you must run the "base-aws-network" terraform first.  Run "terraform init" and "terraform apply".
 
 ## Development
 Outline any requirements to setup a development environment if someone would like to contribute.  You may also link to another file for this information. 
@@ -30,7 +28,7 @@ Please refer to the [F5 DevCentral Community Code of Conduct](code_of_conduct.md
 [Apache License 2.0](LICENSE)
 
 ## Copyright
-Copyright 2014-2020 F5 Networks Inc.
+Copyright 2014-2022 F5 Networks Inc.
 
 
 ### F5 Networks Contributor License Agreement
