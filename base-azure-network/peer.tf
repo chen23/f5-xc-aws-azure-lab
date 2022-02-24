@@ -8,7 +8,7 @@ resource "azurerm_network_security_group" "f5-xc-peer-nsg" {
 
 
 resource "azurerm_network_security_rule" "f5-xc-peer-nsg-rule" {
-  name                        = "allow_trusted"
+  name                        = "allow_trusted_peer"
   priority                    = 100
   direction                   = "Inbound"
   access                      = "Allow"
@@ -22,7 +22,7 @@ resource "azurerm_network_security_rule" "f5-xc-peer-nsg-rule" {
 }
 
 resource "azurerm_network_security_rule" "f5-xc-peer-nsg-rule2" {
-  name                        = "allow_trusted"
+  name                        = "allow_trusted_peer2"
   priority                    = 101
   direction                   = "Inbound"
   access                      = "Allow"
