@@ -1,6 +1,7 @@
-projectPrefix = "eric"
-namespace     = "eric"
-trusted_ip    = "192.0.2.10/32"
+projectPrefix      = "eric"
+namespace          = "eric"
+trusted_ip         = "192.0.2.10/32"
+auto_trust_localip = false
 
 volterraTenant         = "f5-sales-public"
 volterraCloudCredAWS   = "eric-aws"
