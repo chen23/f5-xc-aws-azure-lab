@@ -1,14 +1,6 @@
 ## install Terragrunt
 The [documentation](https://terragrunt.gruntwork.io/docs/getting-started/install/) is the best place to start.
 
-## setup environment variables
-```bash
-export VOLT_API_P12_FILE=/path/to/my.p12
-export VES_P12_PASSWORD='secretp12pass'
-export VOLT_API_TIMEOUT='60s'
-export VOLT_API_URL=https://tenant.console.ves.volterra.io/api
-```
-
 ## edit the root terragrunt.hcl
 - copy terragrunt.hcl.example to terragrunt.hcl
 - move terragrunt.hcl up one directory to get it out of the source control path (```mv terragrunt.hcl ../```)
