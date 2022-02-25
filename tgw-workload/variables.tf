@@ -1,6 +1,18 @@
-variable awsRegion {}
-variable projectPrefix {}
-variable ssh_key {}
-variable spokeSecurityGroup {}
-variable spokeExternalSubnets {}
-variable spokeWorkloadSubnets {}
+variable awsRegion {
+    type = string
+}
+variable projectPrefix {
+    type = string
+}
+variable ssh_key {
+    type = string
+}
+variable spokeSecurityGroup {
+    type = string
+}
+variable spokeExternalSubnets {
+    type = map
+}
+variable spokeWorkloadSubnets {
+    type = map
+}
