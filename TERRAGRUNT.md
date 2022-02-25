@@ -70,6 +70,9 @@ If you want to execute the ```terragrunt apply``` commands discretely, you can c
 
 
 ## clean up?
+you should be able to clean up the cloud resources with ```terragrunt run-all destroy```. You can also cd into each directory discretely and run ```terragrunt destroy```. Because of the dependency management performed by terragrunt, you won't be able to run ```terraform destroy```, except for those directories without dependencies like **base-aws-network** and **base-azure-network**.
+
+
 If you've deleted everything with terragrunt or terraform and you want to save disk space on terraform providers and modules, you can try the following. YOU MAY LOSE STUFF THAT'S PRECIOUS TO YOU. IF YOU'RE NOT CERTAIN THEN DON'T DO THIS.
 ```shell
 # remove the providers and modules you've downloaded
