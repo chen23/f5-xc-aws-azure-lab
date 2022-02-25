@@ -45,12 +45,16 @@ inputs = {
 you should be able to leave the ```terragrunt.hcl``` files in the subdirectories as-is.
 
 ## run terragrunt
-
+Review the dependencies interpreted by Terragrunt
+```shell
+terragrunt graph-dependencies
+```
+Build all of the resources
 ```shell
 terragrunt run-all apply
 ```
 
-Review the proposed order of execution and enter *y* if it looks apprpriate 
+Review the proposed order of execution and enter **y** if it looks apprpriate 
 ```shell
 INFO[0000] The stack at /home/mjmenger/f5-xc-aws-azure-lab will be processed in the following order for command apply:
 Group 1
