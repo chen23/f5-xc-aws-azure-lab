@@ -54,3 +54,17 @@ Are you sure you want to run 'terragrunt apply' in each folder of the stack desc
 ```
 
 If you want to execute the ```terragrunt apply``` commands discretely, you can cd into each of the subdirectories and enter ```terragrunt apply```.
+
+
+
+
+## clean up?
+If you've deleted everything with terragrunt or terraform and you want to save disk space on terraform providers and modules, you can try the following. YOU MAY LOSE STUFF THAT'S PRECIOUS TO YOU. IF YOU'RE NOT CERTAIN THEN DON'T DO THIS.
+```shell
+# remove the providers and modules you've downloaded
+find . -type d -name ".terraform" -exec rm -rf "{}" \;
+# remove the configuration lock file unless you don't want to 
+find . -type f -name ".terraform.lock.hcl" -delete
+# remove the state file because there's nothing to track the state of ... you hope
+find . -type f -name "terraform.tfstate*" -delete
+```
