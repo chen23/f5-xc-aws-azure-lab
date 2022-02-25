@@ -1,9 +1,0 @@
-projectPrefix = "eric"
-namespace     = "eric"
-trusted_ip    = "192.0.2.10/32"
-
-volterraTenant         = "f5-sales-public"
-volterraCloudCredAWS   = "eric-aws"
-volterraCloudCredAzure = "eric-azure"
-awsRegion              = "us-east-1"
-
