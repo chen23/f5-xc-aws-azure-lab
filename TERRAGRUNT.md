@@ -10,22 +10,41 @@ export VOLT_API_URL=https://tenant.console.ves.volterra.io/api
 ```
 
 ## edit the root terragrunt.hcl
-adjust the value in the *input* stanza as appropriate
+- copy terragrunt.hcl.example to terragrunt.hcl
+- move terragrunt.hcl up one directory to get it out of the source control path (```mv terragrunt.hcl ../```)
+- edit the terragrunt.hcl file you just moved as follows
+
+adjust the value in the *env_vars* and *input* stanzas as appropriate
 ```hcl
 terraform {
+    extra_arguments "volterra" {
+        commands = ["apply","plan","destroy"]
+        arguments = []
+        env_vars = {
+            VES_P12_PASSWORD  = "secret"
+            VOLT_API_URL      = "https://tenant.console.ves.volterra.io/api"
+            VOLT_API_TIMEOUT  = "60s"
+            VOLT_API_P12_FILE = "/path/to/my.p12"
+        }
+    }
 
+    after_hook "experiment" {
+        commands = ["apply","plan","destroy"]
+        execute  = ["echo","-----------------!!!!!!!!!!!!!!!!! SUPER DONE !!!!!!!!!!!!!!!!!-----------------"]
+    }
 
 }
 
 inputs = {
     projectPrefix          = "menger"
     namespace              = "m-menger"
-    trusted_ip             = "192.0.1.0/32"
-    volterraTenant         = "f5-sa"
-    volterraCloudCredAWS   = "m-menger-aws-cred"
-    volterraCloudCredAzure = "m-menger-azure-cred"
+    trusted_ip             = "192.0.10.1/32"
+    volterraTenant         = "tenant"
+    volterraCloudCredAWS   = "pre-existing-aws-credential"
+    volterraCloudCredAzure = "pre-existing-azure-credential"
     awsRegion              = "us-east-1"
-    ssh_key                = "my-ec2-key-name"
+    azureRegion            = "westus2"
+    ssh_key                = "ec2-key-name"
 }
 ```
 you should be able to leave the ```terragrunt.hcl``` files in the subdirectories as-is.
