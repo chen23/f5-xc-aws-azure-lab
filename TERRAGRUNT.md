@@ -1,3 +1,6 @@
+## Install Terraform
+[Install terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli). Or, for greater flexibility in managing the version of Terraform you're using, you may consider using [tfenv](https://github.com/tfutils/tfenv)
+
 ## install Terragrunt
 The [documentation](https://terragrunt.gruntwork.io/docs/getting-started/install/) is the best place to start.
 

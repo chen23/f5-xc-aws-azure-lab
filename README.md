@@ -4,10 +4,10 @@
 Lab environment for AWS/Azure Multi-Cloud Networking.
 
 ## Getting Started
-This uses terraform to deploy resources.
+This uses terraform and [terragrunt](TERRAGRUNT.md) to deploy resources.
 
 ## Installation
-Download terraform
+[Install terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli). For greater flexibility in managing the version of Terraform you're using, you may consider using [tfenv](https://github.com/tfutils/tfenv)
 
 ## Usage
 To deploy the AWS site start in the "base-aws-network" directory.  Run "terraform init".  Configure the necessary variables.  Run "terraform apply".
