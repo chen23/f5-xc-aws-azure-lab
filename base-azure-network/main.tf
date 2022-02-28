@@ -28,7 +28,8 @@ resource "azurerm_network_security_rule" "f5-xc-nsg-rule" {
   protocol                    = "*"
   source_port_range           = "*"
   destination_port_range      = "*"
-  source_address_prefix       = var.trusted_ip
+  #source_address_prefix      = var.trusted_ip
+  source_address_prefixes     = local.trusted_cidr
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.rg.name
   network_security_group_name = azurerm_network_security_group.f5-xc-nsg.name
