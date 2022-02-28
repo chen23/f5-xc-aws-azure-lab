@@ -67,3 +67,27 @@ resource "volterra_aws_tgw_site" "aws-region-1" {
   }
   logs_streaming_disabled = true
 }
+
+resource "volterra_tf_params_action" "aws-region-1" {
+  site_name        = volterra_aws_tgw_site.aws-region-1.name
+  site_kind        = "aws_tgw_site"
+  action           = "apply"
+  wait_for_action  = true
+  ignore_on_update = false
+
+  depends_on = [volterra_aws_tgw_site.aws-region-1]
+}
+
+########################### Providers ##########################
+provider "aws" {
+  region = var.awsRegion
+}
+# Instance info
+data "aws_instances" "xcmesh" {
+  instance_state_names = ["running"]
+  instance_tags = {
+    "ves-io-site-name" = volterra_aws_tgw_site.aws-region-1.name
+  }
+
+  depends_on = [volterra_tf_params_action.aws-region-1]
+}
