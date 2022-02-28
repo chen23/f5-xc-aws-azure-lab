@@ -1,10 +1,10 @@
 ## Install Terraform
 [Install terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli). Or, for greater flexibility in managing the version of Terraform you're using, you may consider using [tfenv](https://github.com/tfutils/tfenv)
 
-## install Terragrunt
+## Install Terragrunt
 The [documentation](https://terragrunt.gruntwork.io/docs/getting-started/install/) is the best place to start.
 
-## edit the root terragrunt.hcl
+## Edit the root terragrunt.hcl
 - copy terragrunt.hcl.example to terragrunt.hcl
 - move terragrunt.hcl up one directory to get it out of the source control path (```mv terragrunt.hcl ../```)
 - edit the terragrunt.hcl file you just moved as follows
@@ -44,7 +44,7 @@ inputs = {
 ```
 you should be able to leave the ```terragrunt.hcl``` files in the subdirectories as-is.
 
-## run terragrunt
+## Run Terragrunt
 Review the dependencies interpreted by Terragrunt
 ```shell
 terragrunt graph-dependencies
@@ -76,7 +76,7 @@ If you want to execute the ```terragrunt apply``` commands discretely, you can c
 
 
 
-## clean up?
+## Clean Up?
 you should be able to clean up the cloud resources with ```terragrunt run-all destroy```. You can also cd into each directory discretely and run ```terragrunt destroy```. Because of the dependency management performed by terragrunt, you won't be able to run ```terraform destroy```, except for those directories without dependencies like **base-aws-network** and **base-azure-network**.
 
 

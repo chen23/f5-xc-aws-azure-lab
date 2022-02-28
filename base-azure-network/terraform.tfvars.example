@@ -1,0 +1,4 @@
+projectPrefix      = "eric"
+trusted_ip         = "192.0.2.10/32"
+auto_trust_localip = true
+azureRegion        = "eastus1"

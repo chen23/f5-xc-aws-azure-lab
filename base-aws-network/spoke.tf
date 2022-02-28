@@ -107,7 +107,7 @@ resource "aws_security_group" "f5-xc-spoke-vpc" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = [var.trusted_ip]
+    cidr_blocks = local.trusted_cidr
   }
 
   egress {
