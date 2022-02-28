@@ -1,5 +1,10 @@
 {
 "projectPrefix":"${projectPrefix}",
+"namespace":"${namespace}",
+"trusted_ip": "${trusted_ip}",
+"volterraCloudCredAWS": "${volterraCloudCredAWS}",
+"volterraCloudCredAzure": "${volterraCloudCredAzure}",
+"volterraTenant": "${volterraTenant}",
 "awsRegion":"${awsRegion}",
 "awsAz1":"${awsAz1}",
 "awsAz2":"${awsAz2}",
