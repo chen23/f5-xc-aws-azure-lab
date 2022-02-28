@@ -10,10 +10,10 @@ terraform {
         }
     }
 
-    after_hook "experiment" {
-        commands = ["apply","plan","destroy"]
-        execute  = ["echo","-----------------!!!!!!!!!!!!!!!!! SUPER DONE !!!!!!!!!!!!!!!!!-----------------"]
-    }
+    # after_hook "experiment" {
+    #     commands = ["apply","plan","destroy"]
+    #     execute  = ["echo","-----------------!!!!!!!!!!!!!!!!! SUPER DONE !!!!!!!!!!!!!!!!!-----------------"]
+    # }
 
 }
 
