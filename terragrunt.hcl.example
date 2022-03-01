@@ -1,0 +1,30 @@
+terraform {
+    extra_arguments "volterra" {
+        commands = ["apply","plan","destroy"]
+        arguments = []
+        env_vars = {
+            VES_P12_PASSWORD  = "secret"
+            VOLT_API_URL      = "https://tenant.console.ves.volterra.io/api"
+            VOLT_API_TIMEOUT  = "60s"
+            VOLT_API_P12_FILE = "/path/to/my.p12"
+        }
+    }
+
+    # after_hook "experiment" {
+    #     commands = ["apply","plan","destroy"]
+    #     execute  = ["echo","-----------------!!!!!!!!!!!!!!!!! SUPER DONE !!!!!!!!!!!!!!!!!-----------------"]
+    # }
+
+}
+
+inputs = {
+    projectPrefix          = "menger"
+    namespace              = "m-menger"
+    trusted_ip             = "192.0.10.1/32"
+    volterraTenant         = "tenant"
+    volterraCloudCredAWS   = "pre-existing-aws-credential"
+    volterraCloudCredAzure = "pre-existing-azure-credential"
+    awsRegion              = "us-east-1"
+    azureRegion            = "westus2"
+    ssh_key                = "ec2-key-name"
+}

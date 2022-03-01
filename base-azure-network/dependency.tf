@@ -1,14 +1,12 @@
-data "template_file" "azure_tfvars" {
-  template = file("../azure-site/terraform.tfvars.json.example")
-  vars = {
-    projectPrefix   = var.projectPrefix
-    azureRegion       = var.azureRegion
-    resourceGroup     = "${var.projectPrefix}-f5-xc"
-    hubVnetName       = azurerm_virtual_network.f5-xc-hub.name
-  }
+output projectPrefix {
+  value = var.projectPrefix
 }
-
-resource "local_file" "azure_tfvars" {
-  content  = data.template_file.azure_tfvars.rendered
-  filename = "../azure-site/terraform.tfvars.json"
+output azureRegion {
+  value = var.azureRegion
+}
+output resourceGroup {
+  value = "${var.projectPrefix}-f5-xc"
+}
+output hubVnetName {
+  value = azurerm_virtual_network.f5-xc-hub.name
 }
