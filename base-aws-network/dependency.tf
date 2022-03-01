@@ -41,6 +41,20 @@ output spokeSecurityGroup {
   value = aws_security_group.f5-xc-spoke-vpc.id
 }
 
+output spoke2ExternalSubnets { 
+  value   = aws_subnet.f5-xc-spoke2-external
+}
+output spoke2WorkloadSubnets {
+  value = aws_subnet.f5-xc-spoke2-workload
+}
+
+output spoke2VpcId{
+  value = aws_vpc.f5-xc-spoke2.id
+}
+output spoke2SecurityGroup {
+  value = aws_security_group.f5-xc-spoke2-vpc.id
+}
+
 
 
 

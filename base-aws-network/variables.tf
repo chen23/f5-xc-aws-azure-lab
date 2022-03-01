@@ -165,3 +165,53 @@ variable "spokeVpc" {
 
   }
 }
+
+
+variable "spoke2VpcCidrBlock" {
+  default = "10.0.48.0/20"
+}
+variable "spoke2Vpc" {
+  description = "Spoke VPC"
+  type        = map(any)
+  default = {
+    "azs" = {
+      "az1" = { az = "us-east-1a" },
+      "az2" = { az = "us-east-1b" },
+      "az3" = { az = "us-east-1c" },
+    },
+    "external" = {
+      "az1" = {
+        cidr = "10.0.48.0/24"
+      },
+      "az2" = {
+        cidr = "10.0.51.0/24"
+      },
+      "az3" = {
+        cidr = "10.0.54.0/24"
+      }
+    },
+    "internal" = {
+      "az1" = {
+        cidr = "10.0.49.0/24"
+      },
+      "az2" = {
+        cidr = "10.0.52.0/24"
+      },
+      "az3" = {
+        cidr = "10.0.55.0/24"
+      }
+    },
+    "workload" = {
+      "az1" = {
+        cidr = "10.0.50.0/24"
+      },
+      "az2" = {
+        cidr = "10.0.53.0/24"
+      },
+      "az3" = {
+        cidr = "10.0.56.0/24"
+      }
+    }
+
+  }
+}

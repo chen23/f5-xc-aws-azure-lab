@@ -7,6 +7,9 @@ resource "volterra_aws_tgw_site" "aws-region-1" {
     vpc_list {
       vpc_id = var.spokeVpcId
     }
+    vpc_list {
+      vpc_id = var.spoke2VpcId
+    }    
   }
 
   aws_parameters {

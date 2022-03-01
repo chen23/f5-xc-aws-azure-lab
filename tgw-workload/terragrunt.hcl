@@ -31,4 +31,7 @@ inputs = {
     spokeExternalSubnets = dependency.infrastructure.outputs.spokeExternalSubnets
     spokeWorkloadSubnets = dependency.infrastructure.outputs.spokeWorkloadSubnets
     spokeSecurityGroup   = dependency.infrastructure.outputs.spokeSecurityGroup
+    spoke2ExternalSubnets = dependency.infrastructure.outputs.spoke2ExternalSubnets
+    spoke2WorkloadSubnets = dependency.infrastructure.outputs.spoke2WorkloadSubnets
+    spoke2SecurityGroup   = dependency.infrastructure.outputs.spoke2SecurityGroup    
 }

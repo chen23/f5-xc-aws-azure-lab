@@ -75,3 +75,4 @@ variable "workloadSubnets" {
   type = map
 }
 variable "spokeVpcId" {}
+variable "spoke2VpcId" {}

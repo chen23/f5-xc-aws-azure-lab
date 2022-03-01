@@ -22,5 +22,6 @@ inputs = {
     securityGroup        = dependency.infrastructure.outputs.securityGroup
     vpcId                = dependency.infrastructure.outputs.vpcId
     spokeVpcId           = dependency.infrastructure.outputs.spokeVpcId
+    spoke2VpcId           = dependency.infrastructure.outputs.spoke2VpcId    
     spokeSecurityGroup   = dependency.infrastructure.outputs.spokeSecurityGroup
 }

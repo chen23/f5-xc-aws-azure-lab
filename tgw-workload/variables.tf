@@ -16,3 +16,14 @@ variable spokeExternalSubnets {
 variable spokeWorkloadSubnets {
     type = map
 }
+
+
+variable spoke2SecurityGroup {
+    type = string
+}
+variable spoke2ExternalSubnets {
+    type = map
+}
+variable spoke2WorkloadSubnets {
+    type = map
+}
