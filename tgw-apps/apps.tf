@@ -30,6 +30,17 @@ resource "volterra_origin_pool" "workload1" {
         }
       }
     }
+}
+origin_servers {
+    private_ip {
+      ip = var.workload_ip2
+      site_locator {
+        site {
+          namespace = "system"
+          name      = format("%s-tgw-1", var.projectPrefix)
+        }
+      }
+    }
 
   }
   healthcheck {
@@ -43,7 +54,7 @@ resource "volterra_http_loadbalancer" "workload1" {
   name                            = format("%s-tgw-workload-1", var.projectPrefix)
   namespace                       = var.namespace
   no_challenge                    = true
-  domains                         = ["workload.tgw1.example.internal"]
+  domains                         = ["workload.tgw1.example.internal","workload.global.example.internal"]
 
   disable_rate_limit              = true
   service_policies_from_namespace = true

@@ -55,6 +55,10 @@ output spoke2SecurityGroup {
   value = aws_security_group.f5-xc-spoke2-vpc.id
 }
 
+output serviceExternalRouteTable {
+  value = aws_route_table.f5-xc-services-vpc-external-rt.id
+}
 
-
-
+output serviceCidrBlock {
+  value = var.servicesVpcCidrBlock
+}
