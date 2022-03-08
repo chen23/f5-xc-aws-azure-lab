@@ -3,13 +3,6 @@ include "root" {
 }
 
 terraform {
-    extra_arguments "volterra" {
-        commands = ["apply","plan","destroy"]
-        arguments = []
-        env_vars = {
-            VOLT_API_TIMEOUT  = "60s"
-        }
-    }
 
     before_hook "pre-check" {
         commands = ["apply","plan","destroy"]
