@@ -74,3 +74,41 @@ resource "volterra_http_loadbalancer" "workload2" {
     dns_volterra_managed = false
   }
 }
+
+resource "volterra_http_loadbalancer" "workload2-to-1" {
+  name                            = format("%s-tgw-workload-2-to-1", var.projectPrefix)
+  namespace                       = var.namespace
+  no_challenge                    = true
+  domains                         = ["workload.tgw1.example.internal"]
+
+  disable_rate_limit              = true
+  service_policies_from_namespace = true
+  disable_waf                     = true
+
+  advertise_custom {
+    advertise_where {
+      port = 80
+      site {
+        ### TODO should be variable
+        ip = "100.64.47.254"      
+        network = "SITE_NETWORK_INSIDE"
+        site {
+          name      = format("%s-tgw-2", var.projectPrefix)
+          namespace = "system"
+        }
+      }
+    }
+  }
+
+  default_route_pools {
+    pool {
+      name = format("%s-tgw1-workload-1", var.projectPrefix)
+    }
+    weight = 1
+    priority = 1
+  }
+
+  http {
+    dns_volterra_managed = false
+  }
+}
