@@ -24,7 +24,7 @@ data "aws_availability_zones" "available" {
 locals {
   awsAz1 = var.awsAz1 != null ? var.awsAz1 : data.aws_availability_zones.available.names[0]
   awsAz2 = var.awsAz2 != null ? var.awsAz1 : data.aws_availability_zones.available.names[1]
-  awsAz3 = var.awsAz3 != null ? var.awsAz1 : data.aws_availability_zones.available.names[2]
+  awsAz3 = var.awsAz3 != null ? var.awsAz1 : data.aws_availability_zones.available.names[length(data.aws_availability_zones.available.names)-1]
 }
 
 ##################################################################### VPC's #############################################################

@@ -79,7 +79,7 @@ variable "servicesVpc" {
     "azs" = {
       "az1" = { az = "us-west-1a" },
       "az2" = { az = "us-west-1b" },
-      "az3" = { az = "us-west-1c" },
+      "az3" = { az = "us-west-1b" },
     },
     "external" = {
       "az1" = {
@@ -127,7 +127,7 @@ variable "spokeVpc" {
     "azs" = {
       "az1" = { az = "us-west-1a" },
       "az2" = { az = "us-west-1b" },
-      "az3" = { az = "us-west-1c" },
+      "az3" = { az = "us-west-1b" },
     },
     "external" = {
       "az1" = {
