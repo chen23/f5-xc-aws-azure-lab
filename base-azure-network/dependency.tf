@@ -10,3 +10,6 @@ output resourceGroup {
 output hubVnetName {
   value = azurerm_virtual_network.f5-xc-hub.name
 }
+output workloadSubnet {
+  value = azurerm_subnet.workload-peer.id
+}

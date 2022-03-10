@@ -32,4 +32,6 @@ inputs = {
     # this key name must already exist in AWS region
     # only used for AWS sites
     ssh_key                = "ec2-key-name"
+    # ssh key value
+    azure_public_key       = "ssh-rsa ..."
 }
