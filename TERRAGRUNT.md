@@ -67,7 +67,7 @@ $ terragrunt apply
 This will create 3 AWS VPCs:
 - Service VPC (will host XC Mesh nodes)
 - Spoke VPC (will host EC2 jumphost/workload)
-- Spoke VPC #2 (will host EC2 jumhost/workload)
+- Spoke VPC #2 (will host EC2 jumphost/workload)
 
 The VPCs will be created with an "external" Route Table
 that will be configured to use an Internet Gateway and attached to 3 "external" subnets that are in 3 different AZs.
@@ -174,7 +174,212 @@ Client Protocol: HTTP
      user-agent: curl/7.58.0
 ```     
 
-####
+#### tgw-apps
+
+This directory will deploy load balancer resources that you can use to reach the workload resources externally.
+
+From the top-level directory
+```
+$ cd tgw-apps
+$ terragrunt init
+$ terragrunt apply
+```
+
+Once this completes it will create the following resources.
+- origin pool for workloads in Spoke VPC and Spoke VPC #2
+- load balancer for workloads in Spoke VPC and Spoke VPC #2 (workload.tgw1.example.internal)
+
+You can verify the LB objects by connecting to the external interface of one of the Distributed Cloud Mesh nodes.
+
+You can get this from the output from tgw-site i.e. from top-level directory
+
+```
+$ cd tgw-site
+$ terragrunt output
+xcmesh = {
+  "filter" = toset(null) /* of object */
+  "id" = "us-east-1"
+  "ids" = tolist([
+    "i-xxx",
+    "i-yyy",
+    "i-zzz",
+  ])
+  "instance_state_names" = toset([
+    "running",
+  ])
+  "instance_tags" = tomap({
+    "ves-io-site-name" = "projectPrefix-tgw-1"
+  })
+  "private_ips" = tolist([
+    "100.64.0.75",
+    "100.64.3.37",
+    "100.64.6.27",
+  ])
+  "public_ips" = tolist([
+    "192.0.2.10",
+    "192.0.2.11",
+    "192.0.2.12",
+  ])
+}
+```
+
+You can then use this to verify your connection.
+
+```
+$ curl -H host:workload.tgw1.example.internal 192.0.2.10/txt
+==========================================================================
+ /$$    /$$          /$$   /$$
+| $$   | $$         | $$  | $$
+| $$   | $$ /$$$$$$ | $$ /$$$$$$    /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$
+|  $$ / $$//$$__  $$| $$|_  $$_/   /$$__  $$ /$$__  $$ /$$__  $$|____  $$
+ \  $$ $$/| $$  \ $$| $$  | $$    | $$$$$$$$| $$  \__/| $$  \__/ /$$$$$$$
+  \  $$$/ | $$  | $$| $$  | $$ /$$| $$_____/| $$      | $$      /$$__  $$
+   \  $/  |  $$$$$$/| $$  |  $$$$/|  $$$$$$$| $$      | $$     |  $$$$$$$
+    \_/    \______/ |__/   \___/   \_______/|__/      |__/      \_______/
+==========================================================================
+
+      Node Name: Private Endpoint
+     Short Name: ip-10-0-2-168
+
+      Server IP: 10.0.2.168
+    Server Port: 8080
+
+      Client IP: 100.64.1.185
+    Client Port: 51240
+
+Client Protocol: HTTP
+ Request Method: GET
+    Request URI: /txt
+
+    host_header: workload.tgw1.example.internal
+     user-agent: curl/7.58.0
+x-forwarded-for: 192.0.2.100
+
+```
+
+## Run Terragrunt for a second AWS Site
+
+The following will expand the original build to add another site.
+
+### base-aws-network2
+
+Similar to `base-aws-network` this will build a set of resources.
+
+```
+$ cd base-aws-network2
+$ terragrunt init
+$ terragrunt plan
+$ terragrunt apply
+```
+
+This will create 2 AWS VPCs:
+- Service VPC (will host XC Mesh nodes)
+- Spoke VPC (will host EC2 jumphost/workload)
+
+### tgw-site2
+
+This will create a second Distributed Cloud AWS TGW Site.
+
+```
+$ cd tgw-site2
+$ terragrunt init
+$ terragrunt plan
+$ terragrunt apply
+```
+
+### tgw-workload2
+
+Create additional workload resources (you have to wait until tgw-site2 completes).
+
+```
+$ cd tgw-workload2
+$ terragrunt init
+$ terragrunt plan
+$ terragrunt apply
+```
+
+### tgw-apps-1-to-2
+
+This directory will create resources that will allow your workloads from tgw1 to connect to tgw2 and vice versa.
+
+```
+$ cd tgw-apps-1-to-2
+$ terragrunt init
+$ terragrunt plan
+$ terragrunt apply
+```
+
+This will create the following resources
+- Origin pool for tgw2 workload
+- Load Balancer for tgw2 workload that is exposed in tgw1
+- Load Balancer for tgw1 workload that is exposed in tgw2
+
+Once these resources are deployed you should be able to connect to tgw1 workload from your tgw2 workload, i.e.
+
+```
+ubuntu@ip-10-0-34-134:~$ curl -H host:workload.tgw1.example.internal 100.64.47.254/txt
+==========================================================================
+ /$$    /$$          /$$   /$$
+| $$   | $$         | $$  | $$
+| $$   | $$ /$$$$$$ | $$ /$$$$$$    /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$
+|  $$ / $$//$$__  $$| $$|_  $$_/   /$$__  $$ /$$__  $$ /$$__  $$|____  $$
+ \  $$ $$/| $$  \ $$| $$  | $$    | $$$$$$$$| $$  \__/| $$  \__/ /$$$$$$$
+  \  $$$/ | $$  | $$| $$  | $$ /$$| $$_____/| $$      | $$      /$$__  $$
+   \  $/  |  $$$$$$/| $$  |  $$$$/|  $$$$$$$| $$      | $$     |  $$$$$$$
+    \_/    \______/ |__/   \___/   \_______/|__/      |__/      \_______/
+==========================================================================
+
+      Node Name: Private Endpoint
+     Short Name: ip-10-0-2-168
+
+      Server IP: 10.0.2.168
+    Server Port: 8080
+
+      Client IP: 100.64.1.185
+    Client Port: 51250
+
+Client Protocol: HTTP
+ Request Method: GET
+    Request URI: /txt
+
+    host_header: workload.tgw1.example.internal
+     user-agent: curl/7.58.0
+x-forwarded-for: 10.0.34.134
+```
+
+and also be able to connect from the tgw1 workload to tgw2.
+
+```
+ubuntu@ip-10-0-2-168:~$ curl -H host:workload.tgw2.example.internal 100.64.15.254/txt
+==========================================================================
+ /$$    /$$          /$$   /$$
+| $$   | $$         | $$  | $$
+| $$   | $$ /$$$$$$ | $$ /$$$$$$    /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$
+|  $$ / $$//$$__  $$| $$|_  $$_/   /$$__  $$ /$$__  $$ /$$__  $$|____  $$
+ \  $$ $$/| $$  \ $$| $$  | $$    | $$$$$$$$| $$  \__/| $$  \__/ /$$$$$$$
+  \  $$$/ | $$  | $$| $$  | $$ /$$| $$_____/| $$      | $$      /$$__  $$
+   \  $/  |  $$$$$$/| $$  |  $$$$/|  $$$$$$$| $$      | $$     |  $$$$$$$
+    \_/    \______/ |__/   \___/   \_______/|__/      |__/      \_______/
+==========================================================================
+
+      Node Name: Private Endpoint
+     Short Name: ip-10-0-34-134
+
+      Server IP: 10.0.34.134
+    Server Port: 8080
+
+      Client IP: 100.64.37.60
+    Client Port: 51209
+
+Client Protocol: HTTP
+ Request Method: GET
+    Request URI: /txt
+
+    host_header: workload.tgw2.example.internal
+     user-agent: curl/7.58.0
+x-forwarded-for: 10.0.2.168
+```
+
 ## Run Everything (Optional)
 
 The following will build the entire environment and assumes you have credentials in all clouds.  This is left for reference, but it is recommended that you using the steps above to do the deployment by individual directories.
