@@ -40,6 +40,8 @@ inputs = {
     azureRegion            = "westus2"
     # this AWS key name must exist in both regions that you want to test
     ssh_key                = "ec2-key-name"
+    # this is the public key used in azure
+    azure_public_key         = "ssh-rsa ...."
 }
 ```
 you should be able to leave the ```terragrunt.hcl``` files in the subdirectories as-is.
@@ -378,6 +380,92 @@ Client Protocol: HTTP
     host_header: workload.tgw2.example.internal
      user-agent: curl/7.58.0
 x-forwarded-for: 10.0.2.168
+```
+
+## Azure Site
+
+### base-azure-network
+
+This will deploy a basic Azure VNET topology.
+
+```
+$ cd base-azure-network
+$ terragrunt init
+$ terragrunt plan
+$ terragrunt apply
+```
+
+This will create the following Azure resources
+
+- hub vnet (for hosting Distributed Cloud Mesh)
+- peer vnet (for hosting workload resource)
+
+It also sets up VNET peering between the two VNETs.
+
+#### azure-site
+
+This will deploy 3 Distributed Cloud Mesh nodes into the hub VNET.
+
+```
+$ cd azure-site
+$ terragrunt init
+$ terragrunt plan
+$ terragrunt apply
+```
+
+### azure-workload
+
+This will deploy a "workload" VM into the peer VNET.
+```
+$ cd azure-workload
+$ terragrunt init
+$ terragrunt plan
+$ terragrunt apply
+```
+You should be able to SSH to the workload via the Public IP. 
+
+### azure-apps
+
+This will create a Load Balancer endpoint for the azure workload.
+
+```
+$ cd azure-workload
+$ terragrunt init
+$ terragrunt plan
+$ terragrunt apply
+```
+
+You should be able to access the resource via the public IP of one of the Distributed Cloud Mesh nodes, i.e.
+
+```
+$ curl 192.0.2.10 -H host:workload.azure1.example.internal
+==========================================================================
+ /$$    /$$          /$$   /$$
+| $$   | $$         | $$  | $$
+| $$   | $$ /$$$$$$ | $$ /$$$$$$    /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$
+|  $$ / $$//$$__  $$| $$|_  $$_/   /$$__  $$ /$$__  $$ /$$__  $$|____  $$
+ \  $$ $$/| $$  \ $$| $$  | $$    | $$$$$$$$| $$  \__/| $$  \__/ /$$$$$$$
+  \  $$$/ | $$  | $$| $$  | $$ /$$| $$_____/| $$      | $$      /$$__  $$
+   \  $/  |  $$$$$$/| $$  |  $$$$/|  $$$$$$$| $$      | $$     |  $$$$$$$
+    \_/    \______/ |__/   \___/   \_______/|__/      |__/      \_______/
+==========================================================================
+
+      Node Name: Azure Environment
+     Short Name: workload
+
+      Server IP: 10.2.2.4
+    Server Port: 8080
+
+      Client IP: 100.64.17.7
+    Client Port: 51200
+
+Client Protocol: HTTP
+ Request Method: GET
+    Request URI: /
+
+    host_header: workload.azure1.example.internal
+     user-agent: curl/7.64.1
+x-forwarded-for: 192.0.2.100
 ```
 
 ## Run Everything (Optional)
