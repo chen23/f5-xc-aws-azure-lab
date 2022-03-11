@@ -75,7 +75,7 @@ resource "volterra_http_loadbalancer" "workload1" {
 
   default_route_pools {
     pool {
-      name = format("%s-tgw-workload-1", var.projectPrefix)
+      name = volterra_origin_pool.workload1.name
     }
     weight = 1
     priority = 1
