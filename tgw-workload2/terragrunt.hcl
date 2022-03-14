@@ -13,18 +13,15 @@ terraform {
 
 
 dependencies {
-  paths = ["../base-aws-network","../tgw-site"]
+  paths = ["../base-aws-network2","../tgw-site2"]
 }
 
 dependency "infrastructure" {
-  config_path = "../base-aws-network"
+  config_path = "../base-aws-network2"
 }
 
 inputs = {
     spokeExternalSubnets = dependency.infrastructure.outputs.spokeExternalSubnets
     spokeWorkloadSubnets = dependency.infrastructure.outputs.spokeWorkloadSubnets
     spokeSecurityGroup   = dependency.infrastructure.outputs.spokeSecurityGroup
-    spoke2ExternalSubnets = dependency.infrastructure.outputs.spoke2ExternalSubnets
-    spoke2WorkloadSubnets = dependency.infrastructure.outputs.spoke2WorkloadSubnets
-    spoke2SecurityGroup   = dependency.infrastructure.outputs.spoke2SecurityGroup    
 }

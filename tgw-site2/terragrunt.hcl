@@ -3,11 +3,11 @@ include "root" {
 }
 
 dependencies {
-  paths = ["../base-aws-network"]
+  paths = ["../base-aws-network2"]
 }
 
 dependency "infrastructure" {
-  config_path = "../base-aws-network"
+  config_path = "../base-aws-network2"
 }
 
 inputs = {
@@ -22,6 +22,5 @@ inputs = {
     securityGroup        = dependency.infrastructure.outputs.securityGroup
     vpcId                = dependency.infrastructure.outputs.vpcId
     spokeVpcId           = dependency.infrastructure.outputs.spokeVpcId
-    spoke2VpcId           = dependency.infrastructure.outputs.spoke2VpcId    
     spokeSecurityGroup   = dependency.infrastructure.outputs.spokeSecurityGroup
 }

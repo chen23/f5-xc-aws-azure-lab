@@ -34,6 +34,11 @@ variable "awsRegion" {
   type        = string
 }
 
+variable "awsRegion2" {
+  description = "aws region"
+  type        = string
+}
+
 variable "awsAz1" {
   description = "Availability zone, will dynamically choose one if left empty"
   type        = string
@@ -65,14 +70,20 @@ variable "volterraTenant" {
   type        = string
 }
 variable "vpcId" {}
+variable "vpcId2" {}
 variable "externalSubnets" {
-  type = map
+  type = map(any)
 }
 variable "internalSubnets" {
-  type = map
+  type = map(any)
 }
 variable "workloadSubnets" {
-  type = map
+  type = map(any)
 }
 variable "spokeVpcId" {}
 variable "spoke2VpcId" {}
+variable "serviceCidrBlock" {}
+variable "serviceCidrBlock2" {}
+variable "serviceExternalRouteTable" {}
+variable "serviceExternalRouteTable2" {}
+variable "ssh_key" {}

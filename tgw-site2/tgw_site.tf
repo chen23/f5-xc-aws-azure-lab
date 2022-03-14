@@ -1,5 +1,5 @@
 resource "volterra_aws_tgw_site" "aws-region-1" {
-  name        = format("%s-tgw-1", var.projectPrefix)
+  name        = format("%s-tgw-2", var.projectPrefix)
   namespace   = "system"
 #  description = format("Virtual site for %s-%s", var.projectPrefix, local.buildSuffix)
 
@@ -7,14 +7,11 @@ resource "volterra_aws_tgw_site" "aws-region-1" {
     vpc_list {
       vpc_id = var.spokeVpcId
     }
-    vpc_list {
-      vpc_id = var.spoke2VpcId
-    }    
   }
 
   aws_parameters {
     aws_certified_hw = "aws-byol-multi-nic-voltmesh"
-    aws_region       = var.awsRegion
+    aws_region       = var.awsRegion2
     
     vpc_id = var.vpcId
     
@@ -83,7 +80,7 @@ resource "volterra_tf_params_action" "aws-region-1" {
 
 ########################### Providers ##########################
 provider "aws" {
-  region = var.awsRegion
+  region = var.awsRegion2
 }
 # Instance info
 data "aws_instances" "xcmesh" {

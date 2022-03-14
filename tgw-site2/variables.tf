@@ -29,7 +29,7 @@ variable "volterraCloudCredAzure" {
   type        = string
 }
 
-variable "awsRegion" {
+variable "awsRegion2" {
   description = "aws region"
   type        = string
 }
@@ -75,4 +75,3 @@ variable "workloadSubnets" {
   type = map
 }
 variable "spokeVpcId" {}
-variable "spoke2VpcId" {}

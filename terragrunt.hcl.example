@@ -7,6 +7,7 @@ terraform {
             VOLT_API_URL      = "https://tenant.console.ves.volterra.io/api"
             VOLT_API_TIMEOUT  = "60s"
             VOLT_API_P12_FILE = "/path/to/my.p12"
+	    VOLTERRA_TOKEN    = "Volterra API Token"
         }
     }
 
@@ -24,7 +25,13 @@ inputs = {
     volterraTenant         = "tenant"
     volterraCloudCredAWS   = "pre-existing-aws-credential"
     volterraCloudCredAzure = "pre-existing-azure-credential"
+    # these values are also hardcoded as AZs in base-aws-network variables file
     awsRegion              = "us-east-1"
+    awsRegion2             = "us-west-2"
     azureRegion            = "westus2"
+    # this key name must already exist in AWS region
+    # only used for AWS sites
     ssh_key                = "ec2-key-name"
+    # ssh key value
+    azure_public_key       = "ssh-rsa ..."
 }

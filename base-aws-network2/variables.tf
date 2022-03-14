@@ -24,7 +24,7 @@ variable "domain_name" {
   default     = "shared.example.internal"
 }
 
-variable "awsRegion" {
+variable "awsRegion2" {
   description = "aws region"
   type        = string
 }
@@ -70,146 +70,96 @@ variable "volterraCloudCredAzure" {
 }
 
 variable "servicesVpcCidrBlock" {
-  default = "100.64.0.0/20"
+  default = "100.64.32.0/20"
 }
 variable "servicesVpc" {
   description = "Services VPC"
   type        = map(any)
   default = {
     "azs" = {
-      "az1" = { az = "us-east-1a" },
-      "az2" = { az = "us-east-1b" },
-      "az3" = { az = "us-east-1c" },
+      "az1" = { az = "us-west-2a" },
+      "az2" = { az = "us-west-2b" },
+      "az3" = { az = "us-west-2c" },
     },
     "external" = {
       "az1" = {
-        cidr = "100.64.0.0/24"
+        cidr = "100.64.32.0/24"
       },
       "az2" = {
-        cidr = "100.64.3.0/24"
+        cidr = "100.64.35.0/24"
       },
       "az3" = {
-        cidr = "100.64.6.0/24"
+        cidr = "100.64.36.0/24"
       }
     },
     "internal" = {
       "az1" = {
-        cidr = "100.64.1.0/24"
+        cidr = "100.64.33.0/24"
       },
       "az2" = {
-        cidr = "100.64.4.0/24"
+        cidr = "100.64.37.0/24"
       },
       "az3" = {
-        cidr = "100.64.7.0/24"
+        cidr = "100.64.39.0/24"
       }
     },
     "workload" = {
       "az1" = {
-        cidr = "100.64.2.0/24"
+        cidr = "100.64.34.0/24"
       },
       "az2" = {
-        cidr = "100.64.5.0/24"
+        cidr = "100.64.38.0/24"
       },
       "az3" = {
-        cidr = "100.64.8.0/24"
+        cidr = "100.64.40.0/24"
       }
     }
 
   }
 }
 variable "spokeVpcCidrBlock" {
-  default = "10.0.0.0/20"
+  default = "10.0.32.0/20"
 }
 variable "spokeVpc" {
   description = "Spoke VPC"
   type        = map(any)
   default = {
     "azs" = {
-      "az1" = { az = "us-east-1a" },
-      "az2" = { az = "us-east-1b" },
-      "az3" = { az = "us-east-1c" },
+      "az1" = { az = "us-west-2a" },
+      "az2" = { az = "us-west-2b" },
+      "az3" = { az = "us-west-2c" },
     },
     "external" = {
       "az1" = {
-        cidr = "10.0.0.0/24"
+        cidr = "10.0.32.0/24"
       },
       "az2" = {
-        cidr = "10.0.3.0/24"
+        cidr = "10.0.35.0/24"
       },
       "az3" = {
-        cidr = "10.0.6.0/24"
+        cidr = "10.0.38.0/24"
       }
     },
     "internal" = {
       "az1" = {
-        cidr = "10.0.1.0/24"
+        cidr = "10.0.33.0/24"
       },
       "az2" = {
-        cidr = "10.0.4.0/24"
+        cidr = "10.0.36.0/24"
       },
       "az3" = {
-        cidr = "10.0.7.0/24"
+        cidr = "10.0.39.0/24"
       }
     },
     "workload" = {
       "az1" = {
-        cidr = "10.0.2.0/24"
+        cidr = "10.0.34.0/24"
       },
       "az2" = {
-        cidr = "10.0.5.0/24"
+        cidr = "10.0.37.0/24"
       },
       "az3" = {
-        cidr = "10.0.8.0/24"
-      }
-    }
-
-  }
-}
-
-
-variable "spoke2VpcCidrBlock" {
-  default = "10.0.48.0/20"
-}
-variable "spoke2Vpc" {
-  description = "Spoke VPC"
-  type        = map(any)
-  default = {
-    "azs" = {
-      "az1" = { az = "us-east-1a" },
-      "az2" = { az = "us-east-1b" },
-      "az3" = { az = "us-east-1c" },
-    },
-    "external" = {
-      "az1" = {
-        cidr = "10.0.48.0/24"
-      },
-      "az2" = {
-        cidr = "10.0.51.0/24"
-      },
-      "az3" = {
-        cidr = "10.0.54.0/24"
-      }
-    },
-    "internal" = {
-      "az1" = {
-        cidr = "10.0.49.0/24"
-      },
-      "az2" = {
-        cidr = "10.0.52.0/24"
-      },
-      "az3" = {
-        cidr = "10.0.55.0/24"
-      }
-    },
-    "workload" = {
-      "az1" = {
-        cidr = "10.0.50.0/24"
-      },
-      "az2" = {
-        cidr = "10.0.53.0/24"
-      },
-      "az3" = {
-        cidr = "10.0.56.0/24"
+        cidr = "10.0.40.0/24"
       }
     }
 

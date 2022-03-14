@@ -2,7 +2,7 @@ output projectPrefix {
   value = var.projectPrefix
 }
 output awsRegion {
-  value = var.awsRegion
+  value = var.awsRegion2
 }
 output awsAz1 {
   value = var.servicesVpc.azs["az1"]["az"]
@@ -41,19 +41,6 @@ output spokeSecurityGroup {
   value = aws_security_group.f5-xc-spoke-vpc.id
 }
 
-output spoke2ExternalSubnets { 
-  value   = aws_subnet.f5-xc-spoke2-external
-}
-output spoke2WorkloadSubnets {
-  value = aws_subnet.f5-xc-spoke2-workload
-}
-
-output spoke2VpcId{
-  value = aws_vpc.f5-xc-spoke2.id
-}
-output spoke2SecurityGroup {
-  value = aws_security_group.f5-xc-spoke2-vpc.id
-}
 
 output serviceExternalRouteTable {
   value = aws_route_table.f5-xc-services-vpc-external-rt.id
