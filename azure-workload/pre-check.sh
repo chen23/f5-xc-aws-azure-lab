@@ -4,7 +4,7 @@
 #
 
 for x in `seq 1 120`; do
-site_state=$(curl --location --request GET $VOLT_API_URL/config/namespaces/system/azure_sites/$TF_VAR_projectPrefix-azure-1  -H "Authorization: APIToken $VOLTERRA_TOKEN" -H "content-type: application/json" -s  |jq -r .spec.site_state)
+    site_state=$(curl --location --request GET $VOLT_API_URL/config/namespaces/system/azure_vnet_sites/$TF_VAR_projectPrefix-azure-1  -H "Authorization: APIToken $VOLTERRA_TOKEN" -H "content-type: application/json" -s  |jq -r .spec.site_state)
 if [ "$site_state" = "ONLINE" ]; then
    echo "ONLINE: Azure site is online.  Safe to proceed. waited $x minutes"
    exit 0
