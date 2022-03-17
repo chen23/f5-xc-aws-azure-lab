@@ -155,6 +155,29 @@ resource "aws_network_acl_rule" "udp_53" {
   to_port        = 53
 }
 
+resource "aws_network_acl_rule" "tcp_53-2" {
+  network_acl_id = aws_vpc.f5-xc-services.default_network_acl_id
+  rule_number    = 92
+  egress         = false
+  protocol       = "tcp"
+  rule_action    = "allow"
+  cidr_block     = "192.168.0.0/16"
+  from_port      = 53
+  to_port        = 53
+}
+
+resource "aws_network_acl_rule" "udp_53-2" {
+  network_acl_id = aws_vpc.f5-xc-services.default_network_acl_id
+  rule_number    = 93
+  egress         = false
+  protocol       = "udp"
+  rule_action    = "allow"
+  cidr_block     = "192.168.0.0/16"
+  from_port      = 53
+  to_port        = 53
+}
+
+
 resource "aws_network_acl_rule" "deny_tcp_53" {
   network_acl_id = aws_vpc.f5-xc-services.default_network_acl_id
   rule_number    = 98
