@@ -9,14 +9,14 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "rg" {
   name     = "${var.projectPrefix}-f5-xc"
-  location = var.location
+  location = var.azureRegion
 }
 
 
 resource "azurerm_network_security_group" "f5-xc-nsg" {
   name                = "f5_xc_nsg"
   resource_group_name = azurerm_resource_group.rg.name
-  location            = var.location
+  location            = var.azureRegion
 }
 
 
@@ -96,7 +96,7 @@ resource "azurerm_network_security_rule" "allow_dns2" {
 
 resource "azurerm_virtual_network" "f5-xc-hub" {
   name                = "f5_xc_hub_vnet"
-  location            = var.location
+  location            = var.azureRegion
   address_space       = [var.servicesVnetAddressSpace]
   resource_group_name = azurerm_resource_group.rg.name
 }
@@ -125,7 +125,7 @@ resource "azurerm_subnet" "workload" {
 
 resource "azurerm_route_table" "workload" {
   name                = "workload_rt"
-  location            = var.location
+  location            = var.azureRegion
   resource_group_name = azurerm_resource_group.rg.name
 }
 

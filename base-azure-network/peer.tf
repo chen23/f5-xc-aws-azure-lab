@@ -3,7 +3,7 @@
 resource "azurerm_network_security_group" "f5-xc-peer-nsg" {
   name                = "f5_xc_peer_nsg"
   resource_group_name = azurerm_resource_group.rg.name
-  location            = var.location
+  location            = var.azureRegion
 }
 
 
@@ -39,7 +39,7 @@ resource "azurerm_network_security_rule" "f5-xc-peer-nsg-rule2" {
 
 resource "azurerm_virtual_network" "f5-xc-peer" {
   name                = "f5_xc_spoke_vnet"
-  location            = var.location
+  location            = var.azureRegion
   address_space       = [var.spokeVnetAddressSpace]
   resource_group_name = azurerm_resource_group.rg.name
 }
@@ -68,7 +68,7 @@ resource "azurerm_subnet" "workload-peer" {
 
 resource "azurerm_route_table" "workload-peer" {
   name                = "workload-peer_rt"
-  location            = var.location
+  location            = var.azureRegion
   resource_group_name = azurerm_resource_group.rg.name
 }
 
