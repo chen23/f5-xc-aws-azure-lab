@@ -76,3 +76,4 @@ variable "workloadSubnets" {
 }
 variable "spokeVpcId" {}
 variable "spoke2VpcId" {}
+variable "ssh_public_key" {}
