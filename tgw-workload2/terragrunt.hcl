@@ -5,7 +5,7 @@ include "root" {
 terraform {
 
     before_hook "pre-check" {
-        commands = ["apply","plan","destroy"]
+        commands = ["apply","plan"]
         execute  = ["./pre-check.sh"]
     }
 
