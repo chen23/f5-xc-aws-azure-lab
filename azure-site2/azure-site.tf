@@ -3,8 +3,8 @@
 resource "volterra_azure_vnet_site" "azure-site" {
   name        = format("%s-azure-2", var.projectPrefix)
   namespace      = "system"
-  azure_region   = var.azureRegion
-  resource_group = "${var.resourceGroup}2-site"
+  azure_region   = var.azureRegion2
+  resource_group = "${var.resourceGroup}-site"
   machine_type   = "Standard_D3_v2"
 
   assisted                = false
