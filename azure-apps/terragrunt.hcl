@@ -2,6 +2,15 @@ include "root" {
   path = find_in_parent_folders()
 }
 
+terraform {
+
+    before_hook "pre-check" {
+        commands = ["apply","plan","destroy"]
+        execute  = ["./pre-check.sh"]
+    }
+
+}
+
 dependencies {
   paths = ["../azure-workload","../azure-site"]
 }

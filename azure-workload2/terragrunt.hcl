@@ -13,11 +13,11 @@ terraform {
 
 
 dependencies {
-  paths = ["../base-azure-network"]
+  paths = ["../base-azure-network2"]
 }
 
 dependency "infrastructure" {
-  config_path = "../base-azure-network"
+  config_path = "../base-azure-network2"
 }
 
 inputs = {
