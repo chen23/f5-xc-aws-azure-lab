@@ -16,7 +16,7 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_instance" "f5-jumphost-1" {
   ami                    = data.aws_ami.ubuntu.id
-  instance_type          = "t2.micro"
+  instance_type          = "t3.micro"
   subnet_id              = aws_subnet.f5-xc-ext-client-external.id
   vpc_security_group_ids = [aws_security_group.f5-xc-sg.id]
   key_name               = var.ssh_key

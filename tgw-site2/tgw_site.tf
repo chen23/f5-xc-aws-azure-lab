@@ -1,4 +1,4 @@
-resource "volterra_aws_tgw_site" "aws-region-1" {
+resource "volterra_aws_tgw_site" "aws-region-2" {
   name        = format("%s-tgw-2", var.projectPrefix)
   namespace   = "system"
 #  description = format("Virtual site for %s-%s", var.projectPrefix, local.buildSuffix)
@@ -9,11 +9,24 @@ resource "volterra_aws_tgw_site" "aws-region-1" {
     }
   }
 
+  vn_config {
+    global_network_list {
+      global_network_connections {
+        sli_to_global_dr {
+          global_vn {
+            name = format("%s-global-network", var.projectPrefix)
+          }
+        }
+      }
+    }
+  }
+
   aws_parameters {
     aws_certified_hw = "aws-byol-multi-nic-voltmesh"
     aws_region       = var.awsRegion2
     
     vpc_id = var.vpcId
+    ssh_key = var.ssh_public_key
     
     new_tgw {
       system_generated = true
@@ -66,16 +79,31 @@ resource "volterra_aws_tgw_site" "aws-region-1" {
     instance_type = "t3.xlarge"
   }
   logs_streaming_disabled = true
+
+  lifecycle {
+    ignore_changes = [labels]
+  }
 }
 
-resource "volterra_tf_params_action" "aws-region-1" {
-  site_name        = volterra_aws_tgw_site.aws-region-1.name
+resource "volterra_cloud_site_labels" "labels" {
+  name = volterra_aws_tgw_site.aws-region-2.name
+    site_type = "aws_tgw_site"
+    labels = {
+      site-group = var.projectPrefix
+      key1 = "value1"
+      key2 = "value2"
+    }
+  ignore_on_delete = true
+}
+
+resource "volterra_tf_params_action" "aws-region-2" {
+  site_name        = volterra_aws_tgw_site.aws-region-2.name
   site_kind        = "aws_tgw_site"
   action           = "apply"
   wait_for_action  = true
   ignore_on_update = false
 
-  depends_on = [volterra_aws_tgw_site.aws-region-1]
+  depends_on = [volterra_aws_tgw_site.aws-region-2]
 }
 
 ########################### Providers ##########################
@@ -86,8 +114,8 @@ provider "aws" {
 data "aws_instances" "xcmesh" {
   instance_state_names = ["running"]
   instance_tags = {
-    "ves-io-site-name" = volterra_aws_tgw_site.aws-region-1.name
+    "ves-io-site-name" = volterra_aws_tgw_site.aws-region-2.name
   }
 
-  depends_on = [volterra_tf_params_action.aws-region-1]
+  depends_on = [volterra_tf_params_action.aws-region-2]
 }
