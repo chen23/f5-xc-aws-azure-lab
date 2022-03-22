@@ -28,7 +28,8 @@ inputs = {
     # these values are also hardcoded as AZs in base-aws-network variables file
     awsRegion              = "us-east-1"
     awsRegion2             = "us-west-2"
-    azureRegion            = "westus2"
+    azureRegion            = "eastus"
+    azureRegion2            = "westus"    
     # this key name must already exist in AWS region
     # only used for AWS sites
     ssh_key                = "ec2-key-name"
