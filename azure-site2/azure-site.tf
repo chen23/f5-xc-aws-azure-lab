@@ -6,6 +6,7 @@ resource "volterra_azure_vnet_site" "azure-site" {
   azure_region   = var.azureRegion2
   resource_group = "${var.resourceGroup}-site"
   machine_type   = "Standard_D3_v2"
+  ssh_key        = var.ssh_public_key
 
   assisted                = false
   logs_streaming_disabled = true
@@ -111,6 +112,17 @@ resource "volterra_azure_vnet_site" "azure-site" {
     }
   }
 
+}
+
+resource "volterra_cloud_site_labels" "labels" {
+  name = volterra_azure_vnet_site.azure-site.name
+    site_type = "azure_vnet_site"
+    labels = {
+      site-group = var.projectPrefix
+      key1 = "value1"
+      key2 = "value2"
+    }
+  ignore_on_delete = true
 }
 
 resource "volterra_tf_params_action" "azure-site" {
