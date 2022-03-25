@@ -3,7 +3,7 @@
 resource "volterra_azure_vnet_site" "azure-site" {
   name        = format("%s-azure-2", var.projectPrefix)
   namespace      = "system"
-  azure_region   = var.azureRegion2
+  alternate_region   = var.azureRegion2
   resource_group = "${var.resourceGroup}-site"
   machine_type   = "Standard_D3_v2"
   ssh_key        = var.ssh_public_key
@@ -17,52 +17,19 @@ resource "volterra_azure_vnet_site" "azure-site" {
     namespace = "system"
   }
 
-  ingress_egress_gw {
+  ingress_egress_gw_ar {
     azure_certified_hw       = "azure-byol-multi-nic-voltmesh"
     no_forward_proxy         = true
     no_global_network        = true
     no_network_policy        = true
     no_outside_static_routes = true
 
-    az_nodes {
-      azure_az  = "1"
-      disk_size = 80
 
-      inside_subnet {
-        subnet {
-          subnet_name         = "internal_subnet"
-          vnet_resource_group = true
-        }
-      }
-      outside_subnet {
-        subnet {
-          subnet_name         = "external_subnet"
-          vnet_resource_group = true
-        }
-      }
-    }
-
-    az_nodes {
-      azure_az  = "2"
-      disk_size = 80
-
-      inside_subnet {
-        subnet {
-          subnet_name         = "internal_subnet"
-          vnet_resource_group = true
-        }
-      }
-      outside_subnet {
-        subnet {
-          subnet_name         = "external_subnet"
-          vnet_resource_group = true
-        }
-      }
-    }
-
-    az_nodes {
-      azure_az  = "3"
-      disk_size = 80
+    node {
+      fault_domain = 3
+      update_domain = 5
+      node_number = 3
+#      disk_size = 80
 
       inside_subnet {
         subnet {
