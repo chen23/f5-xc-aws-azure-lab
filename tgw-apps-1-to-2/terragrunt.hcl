@@ -17,5 +17,6 @@ dependency "workloads2" {
 
 inputs = {
     workload_ip = dependency.workloads.outputs.workload_ip
-    workload_ip2 = dependency.workloads2.outputs.workload_ip    
+    workload_ip2 = dependency.workloads2.outputs.workload_ip
+    workload_ip3 = dependency.workloads.outputs.workload_ip2        
 }
