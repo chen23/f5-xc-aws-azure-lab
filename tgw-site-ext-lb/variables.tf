@@ -66,13 +66,13 @@ variable "volterraTenant" {
 }
 variable "vpcId" {}
 variable "externalSubnets" {
-  type = map
+  type = map(any)
 }
 variable "internalSubnets" {
-  type = map
+  type = map(any)
 }
 variable "workloadSubnets" {
-  type = map
+  type = map(any)
 }
 variable "spokeVpcId" {}
 variable "spoke2VpcId" {}

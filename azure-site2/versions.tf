@@ -3,7 +3,7 @@ terraform {
 
   required_providers {
     volterra = {
-      source  = "volterraedge/volterra"
+      source = "volterraedge/volterra"
     }
     aws = ">= 2.24"
   }
