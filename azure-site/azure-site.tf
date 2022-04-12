@@ -1,7 +1,7 @@
 ############################ Volterra Azure VNet Sites ############################
 
 resource "volterra_azure_vnet_site" "azure-site" {
-  name        = format("%s-azure-1", var.projectPrefix)
+  name           = format("%s-azure-1", var.projectPrefix)
   namespace      = "system"
   azure_region   = var.azureRegion
   resource_group = "${var.resourceGroup}-site"
@@ -31,7 +31,7 @@ resource "volterra_azure_vnet_site" "azure-site" {
           }
         }
       }
-    }   
+    }
 
     az_nodes {
       azure_az  = "1"
@@ -128,13 +128,13 @@ resource "volterra_azure_vnet_site" "azure-site" {
 }
 
 resource "volterra_cloud_site_labels" "labels" {
-  name = volterra_azure_vnet_site.azure-site.name
-    site_type = "azure_vnet_site"
-    labels = {
-      site-group = var.projectPrefix
-      key1 = "value1"
-      key2 = "value2"
-    }
+  name      = volterra_azure_vnet_site.azure-site.name
+  site_type = "azure_vnet_site"
+  labels = {
+    site-group = var.projectPrefix
+    key1       = "value1"
+    key2       = "value2"
+  }
   ignore_on_delete = true
 }
 

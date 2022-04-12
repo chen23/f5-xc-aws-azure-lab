@@ -4,7 +4,7 @@ include "root" {
 
 
 dependencies {
-  paths = ["../tgw-site","../tgw-workload","../tgw-site2","../tgw-workload2","../tgw-apps","../tgw-site-ext-lb"]
+  paths = ["../tgw-site","../tgw-workload","../tgw-site2","../tgw-workload2","../tgw-apps","../tgw-site-ext-lb","../azure-site","../azure-site2"]
 }
 
 dependency "workloads" {
@@ -34,6 +34,14 @@ dependency "site2" {
   config_path = "../tgw-site2"
 }
 
+dependency "site3" {
+  config_path = "../azure-site"
+}
+dependency "site4" {
+  config_path = "../azure-site2"
+}
+
+
 inputs = {
     route54zoneid       = dependency.tgw1route53.outputs.route54zoneid
     tgw1nlbdns       = dependency.tgw1route53.outputs.nlbdnsname
@@ -44,5 +52,12 @@ inputs = {
     securityGroup2                = dependency.infrastructure2.outputs.securityGroup
     mesh_public_ips                = dependency.site.outputs.public_ips
     mesh_public_ips2                = dependency.site2.outputs.public_ips
+    mesh_public_ips3                = dependency.site3.outputs.public_ips
+    mesh_public_ips4                = dependency.site4.outputs.public_ips
+    mesh_private_ips                = dependency.site.outputs.private_ips
+    mesh_private_ips2                = dependency.site2.outputs.private_ips
+    mesh_private_ips3                = dependency.site3.outputs.private_ips
+    mesh_private_ips4                = dependency.site4.outputs.private_ips    
+
 }
 

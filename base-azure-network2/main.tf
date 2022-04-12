@@ -106,6 +106,19 @@ resource "azurerm_network_security_rule" "allow_ipsec" {
   network_security_group_name = azurerm_network_security_group.f5-xc-nsg.name
 }
 
+resource "azurerm_network_security_rule" "allow_http" {
+  name                        = "allow_http"
+  priority                    = 210
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "TCP"
+  source_port_range           = "*"
+  destination_port_range      = "80"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.rg.name
+  network_security_group_name = azurerm_network_security_group.f5-xc-nsg.name
+}
 
 resource "azurerm_virtual_network" "f5-xc-hub" {
   name                = "f5_xc_hub_vnet"

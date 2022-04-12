@@ -25,6 +25,31 @@ variable "mesh_public_ips" {
 variable "mesh_public_ips2" {
   type = list(string)
 }
+
+variable "mesh_public_ips3" {
+  type = list(string)
+}
+
+variable "mesh_public_ips4" {
+  type = list(string)
+}
+
+variable "mesh_private_ips" {
+  type = list(string)
+}
+
+variable "mesh_private_ips2" {
+  type = list(string)
+}
+
+variable "mesh_private_ips3" {
+  type = list(string)
+}
+
+variable "mesh_private_ips4" {
+  type = list(string)
+}
+
 variable "route54zoneid" {}
 variable "tgw1nlbdns" {}
 variable "securityGroup2" {}
