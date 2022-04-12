@@ -282,6 +282,52 @@ resource "aws_route53_record" "globalworkloadazure1c" {
 }
 
 
+resource "aws_route53_record" "globalworkloadazure2" {
+  zone_id = var.route54zoneid
+  name    = "*.global.example.internal"
+  type    = "A"
+  ttl     = "300"
+
+  health_check_id = aws_route53_health_check.azure2.id
+
+  multivalue_answer_routing_policy = true
+
+  set_identifier = format("%s-azure-2", var.projectPrefix)
+
+  records = [var.mesh_private_ips4[0]]
+}
+
+resource "aws_route53_record" "globalworkloadazure2b" {
+  zone_id = var.route54zoneid
+  name    = "*.global.example.internal"
+  type    = "A"
+  ttl     = "300"
+
+  health_check_id = aws_route53_health_check.azure2b.id
+
+  multivalue_answer_routing_policy = true
+
+  set_identifier = format("%s-azure-2b", var.projectPrefix)
+
+  records = [var.mesh_private_ips4[1]]
+}
+
+resource "aws_route53_record" "globalworkloadazure2c" {
+  zone_id = var.route54zoneid
+  name    = "*.global.example.internal"
+  type    = "A"
+  ttl     = "300"
+
+  health_check_id = aws_route53_health_check.azure2c.id
+
+  multivalue_answer_routing_policy = true
+
+  set_identifier = format("%s-azure-2c", var.projectPrefix)
+
+  records = [var.mesh_private_ips4[2]]
+}
+
+
 
 resource "aws_route53_zone" "private" {
   provider = aws.peer
