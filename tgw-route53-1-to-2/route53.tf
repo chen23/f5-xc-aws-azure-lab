@@ -339,7 +339,130 @@ resource "aws_route53_zone" "private" {
 }
 
 
+resource "aws_route53_health_check" "tgw2-tgw1" {
+  provider = aws.peer
+  count = 3
+  ip_address        = var.mesh_public_ips[count.index]
+  port              = 80
+  type              = "TCP"
+  failure_threshold = "5"
+  request_interval  = "30"
 
+  tags = {
+    Name = format("%s-tgw-1-tgw%s-healthcheck", var.projectPrefix,count.index)
+  }
+}
+
+resource "aws_route53_health_check" "tgw2-tgw2" {
+  provider = aws.peer
+  count = 3
+  ip_address        = var.mesh_public_ips2[count.index]
+  port              = 80
+  type              = "TCP"
+  failure_threshold = "5"
+  request_interval  = "30"
+
+  tags = {
+    Name = format("%s-tgw-2-%s-healthcheck", var.projectPrefix,count.index)
+  }
+}
+
+resource "aws_route53_health_check" "tgw2-azure1" {
+  provider = aws.peer
+  count = 3
+  ip_address        = var.mesh_public_ips3[count.index]
+  port              = 80
+  type              = "TCP"
+  failure_threshold = "5"
+  request_interval  = "30"
+
+  tags = {
+    Name = format("%s-azure-1-%s-healthcheck", var.projectPrefix,count.index)
+  }
+}
+
+
+resource "aws_route53_health_check" "tgw2-azure2" {
+  provider = aws.peer
+  count = 3
+  ip_address        = var.mesh_public_ips4[count.index]
+  port              = 80
+  type              = "TCP"
+  failure_threshold = "5"
+  request_interval  = "30"
+
+  tags = {
+    Name = format("%s-azure-2-%s-healthcheck", var.projectPrefix,count.index)
+  }
+}
+
+resource "aws_route53_record" "globalworkloadtgw2-tgw1" {
+  provider = aws.peer
+  count = 3
+  zone_id  = aws_route53_zone.private.zone_id  
+  name    = "*.global.example.internal"
+  type    = "A"
+  ttl     = "300"
+
+  health_check_id = aws_route53_health_check.tgw2-tgw1[count.index].id
+
+  multivalue_answer_routing_policy = true
+
+  set_identifier = format("%s-tgw-1-%s", var.projectPrefix,count.index)
+
+  records = [var.mesh_private_ips[count.index]]
+}
+
+resource "aws_route53_record" "globalworkloadtgw2-tgw2" {
+  provider = aws.peer
+  count = 3
+  zone_id  = aws_route53_zone.private.zone_id  
+  name    = "*.global.example.internal"
+  type    = "A"
+  ttl     = "300"
+
+  health_check_id = aws_route53_health_check.tgw2-tgw2[count.index].id
+
+  multivalue_answer_routing_policy = true
+
+  set_identifier = format("%s-tgw-2-%s", var.projectPrefix,count.index)
+
+  records = [var.mesh_private_ips2[count.index]]
+}
+
+resource "aws_route53_record" "globalworkloadtgw2-azure1" {
+  provider = aws.peer
+  count = 3
+  zone_id  = aws_route53_zone.private.zone_id  
+  name    = "*.global.example.internal"
+  type    = "A"
+  ttl     = "300"
+
+  health_check_id = aws_route53_health_check.tgw2-azure1[count.index].id
+
+  multivalue_answer_routing_policy = true
+
+  set_identifier = format("%s-azure-1-%s", var.projectPrefix,count.index)
+
+  records = [var.mesh_private_ips3[count.index]]
+}
+
+resource "aws_route53_record" "globalworkloadtgw2-azure2" {
+  provider = aws.peer
+  count = 3
+  zone_id  = aws_route53_zone.private.zone_id  
+  name    = "*.global.example.internal"
+  type    = "A"
+  ttl     = "300"
+
+  health_check_id = aws_route53_health_check.tgw2-azure2[count.index].id
+
+  multivalue_answer_routing_policy = true
+
+  set_identifier = format("%s-azure-2-%s", var.projectPrefix,count.index)
+
+  records = [var.mesh_private_ips4[count.index]]
+}
 
 # resource "aws_route53_record" "tgw2workload" {
 #   provider = aws.peer
