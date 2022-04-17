@@ -18,6 +18,23 @@ dependencies {
 
 dependency "infrastructure" {
   config_path = "../base-aws-network2"
+  mock_outputs = {
+    spokeExternalSubnets= {
+      "az1" = {
+        "id" = "1"
+      }
+    }
+    spokeWorkloadSubnets = {
+      "az1" = {
+        "id" = "1"
+      }
+    }
+    spokeSecurityGroup = {
+      "az1" = {
+        "id" = "1"
+      }
+    }
+  }
 }
 
 inputs = {

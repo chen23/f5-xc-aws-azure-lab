@@ -10,6 +10,10 @@ dependencies {
 
 dependency "workloads" {
   config_path = "../tgw-workload"
+  mock_outputs = {
+    workload_ip = ""
+    workload_ip2 = ""
+  }
 }
 
 inputs = {

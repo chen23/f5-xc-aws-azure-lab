@@ -8,9 +8,56 @@ dependencies {
 
 dependency "infrastructure" {
   config_path = "../base-aws-network"
+  mock_outputs = {
+    awsAz1 = ""
+    awsAz2 = ""
+    awsAz3 = ""
+    "externalSubnets" = {
+      "az1" = {
+        "id" = "1"
+      }
+    }
+    internalSubnets = {
+      "az1" = {
+        "id" = "1"
+      }
+    }
+    workloadSubnets = {
+      "az1" = {
+        "id" = "1"
+      }
+    }
+    spokeExternalSubnets = {
+      "az1" = {
+        "id" = "1"
+      }
+    }
+    spokeExternalSubnets = {
+      "az1" = {
+        "id" = "1"
+      }
+    }
+    spokeWorkloadSubnets = {
+      "az1" = {
+        "id" = "1"
+      }
+    }
+    securityGroup = ""
+    vpcId = ""
+    spokeVpcId = ""
+    spoke2VpcId = ""
+    serviceCidrBlock = "0.0.0.0/0"
+    serviceExternalRouteTable = ""
+    spokeSecurityGroup = ""
+  }
 }
 dependency "infrastructure2" {
   config_path = "../base-aws-network2"
+  mock_outputs = {
+    vpcId = ""
+    serviceExternalRouteTable = ""
+    serviceCidrBlock = "0.0.0.0/0"
+  }
 }
 inputs = {
     awsAz1               = dependency.infrastructure.outputs.awsAz1

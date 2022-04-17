@@ -18,6 +18,11 @@ dependencies {
 
 dependency "infrastructure" {
   config_path = "../base-azure-network2"
+  mock_outputs = {
+    resourceGroup = "foo"
+    hubVnetName = ""
+    workloadSubnet = ""
+  }
 }
 
 inputs = {
