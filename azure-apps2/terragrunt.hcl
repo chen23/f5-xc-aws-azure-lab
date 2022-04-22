@@ -8,6 +8,9 @@ dependencies {
 
 dependency "workloads" {
   config_path = "../azure-workload2"
+  mock_outputs = {
+    workload_private_ip = ""
+  }
 }
 
 inputs = {

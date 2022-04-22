@@ -9,36 +9,80 @@ dependencies {
 
 dependency "workloads" {
   config_path = "../tgw-workload"
+  mock_outputs = {
+  }
 }
 
 dependency "workloads2" {
   config_path = "../tgw-workload2"
+  mock_outputs = {
+  }
 }
 
 dependency "infrastructure" {
   config_path = "../base-aws-network"
+  mock_outputs = {
+    "externalSubnets" = {
+      "az1" = {
+        "id" = "1"
+      }
+    }
+    vpcId = ""
+  }
 }
 
 dependency "infrastructure2" {
   config_path = "../base-aws-network2"
+  mock_outputs = {
+    "externalSubnets" = {
+      "az1" = {
+        "id" = "1"
+      },
+      "az2" = {
+        "id" = "2"
+      }
+    }
+    vpcId = ""
+    securityGroup = ""
+  }
 }
 
 dependency "tgw1route53" {
   config_path = "../tgw-site-ext-lb"
+  mock_outputs = {
+    route54zoneid = "foo"
+    nlbdnsname = ""
+  }
 }
 
 dependency "site" {
   config_path = "../tgw-site"
+  mock_outputs = {
+    public_ips = ["1.1.1.1","1.1.1.1","1.1.1.1"]
+    private_ips = ["1.1.1.1","1.1.1.1","1.1.1.1"]
+  }
 }
 dependency "site2" {
   config_path = "../tgw-site2"
+  mock_outputs = {
+    public_ips = ["1.1.1.1","1.1.1.1","1.1.1.1"]
+    private_ips = ["1.1.1.1","1.1.1.1","1.1.1.1"]
+  }
 }
 
 dependency "site3" {
   config_path = "../azure-site"
+  mock_outputs = {
+    public_ips = ["1.1.1.1","1.1.1.1","1.1.1.1"]
+    private_ips = ["1.1.1.1","1.1.1.1","1.1.1.1"]
+  }
 }
 dependency "site4" {
   config_path = "../azure-site2"
+  mock_outputs = {
+    public_ips = ["1.1.1.1","1.1.1.1","1.1.1.1"]
+    private_ips = ["1.1.1.1","1.1.1.1","1.1.1.1"]
+  }
 }
 
 
