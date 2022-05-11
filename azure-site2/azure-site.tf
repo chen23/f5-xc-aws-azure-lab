@@ -220,6 +220,10 @@ resource "volterra_azure_vnet_site" "azure-site" {
     }
   }
 
+  lifecycle {
+    ignore_changes = [labels]
+  }
+
 }
 
 resource "volterra_cloud_site_labels" "labels" {
