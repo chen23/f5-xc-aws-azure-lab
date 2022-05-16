@@ -44,6 +44,7 @@ resource "volterra_aws_tgw_site" "aws-region-1" {
         }
       }
     }
+    sm_connection_pvt_ip = true
   }
 
   aws_parameters {
