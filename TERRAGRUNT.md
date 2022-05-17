@@ -41,7 +41,7 @@ inputs = {
     # this AWS key name must exist in both regions that you want to test
     ssh_key                = "ec2-key-name"
     # this is the public key used in azure
-    azure_public_key         = "ssh-rsa ...."
+    ssh_public_key         = "ssh-rsa ...."
 }
 ```
 you should be able to leave the ```terragrunt.hcl``` files in the subdirectories as-is.
