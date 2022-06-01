@@ -10,6 +10,18 @@ The [documentation](https://terragrunt.gruntwork.io/docs/getting-started/install
 - edit the terragrunt.hcl file you just moved as follows
 
 adjust the value in the *env_vars* and *input* stanzas as appropriate
+
+Notes
+* To create the required credentials for this to work, in the F5 Distributed Cloud UI, Go to Administration, Personal Management , Credentials.  Create an API certificate with a password.  Download the *.p12 file to your system making note of where it is stored.  Place the location of that file on your filesystem in the line below called VOLT_API_P12_FILE. Put the password that you used in the env_vars labeled VES_P12_PASSWORD.
+* Create another credential, this time an API token.  Copy the contents of the token and paste into the env_vars labeled VOLTERRA_TOKEN
+* Change the word "tenant" in VOLT_API_URL to the tenant that is in the URL when you log into the UI.  Leave the rest of the URL the same.
+* trusted_ip is the IP address of what you look like on the internet.  This is for setting up security groups in the clouds. To find this out, type "What is my IP" into Google.
+* To find the value for "volterraTenant", log into the Volterra UI and go to Administration, Tenant Settings, Tenant Overview.  Your tenant ID will be listed at the top.  This is more than what is in the URI you use to access.  For example, the URL you use to get to the GUI may be "mycompany.console.ves.volterra.io" , but your tenant ID may be something like "mycompany-nygdlhgd"
+* ssh_public key - The public key of an ssh key pair that you've created where the private key is stored on your system. https://docs.oracle.com/en/cloud/cloud-at-customer/occ-get-started/generate-ssh-key-pair.html
+* volterraCloudCredAWS and volterraCloudCredAzure - The name of the cloud credentials object inside of F5 Distributed Cloud. Cloud and Edge Sites -> Site Management -> Cloud Credentials
+* ssh_key - name of the object in AWS which is your keypair
+
+
 ```hcl
 terraform {
     extra_arguments "volterra" {
